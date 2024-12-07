@@ -1,9 +1,19 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
+
 import { Calendar, CircleDollarSign, MapPin } from "lucide-react";
+
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Input } from "~/components/ui/input";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "~/components/ui/breadcrumb";
 
 export const meta: MetaFunction = () => {
   return [
@@ -29,8 +39,19 @@ export default function Invoices() {
 
   return (
     <div className="flex flex-col space-y-5">
+      <Breadcrumb className="mt-5 mx-6">
+        <BreadcrumbList className="mx-6">
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Search</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
       <div className="flex justify-center">
-        <Card className="w-5/6 mt-5">
+        <Card className="w-5/6">
           <CardHeader>
             <CardTitle>Search TicketTrackr</CardTitle>
           </CardHeader>
@@ -56,9 +77,12 @@ export default function Invoices() {
         <Card className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 w-11/12 p-5 transition-all">
           {events.map((event: any, index: number) => (
             <Link
-              key={index}
-              to={`/events/${event.id}`}
               className="hover:scale-105 transition-all"
+              key={index}
+              to={{
+                pathname: "/event",
+                search: `?ticketProvider=ticketmaster&id=${event.id}`,
+              }}
             >
               <Card key={index} className="h-full pt-3 px-3 pb-1">
                 <img
