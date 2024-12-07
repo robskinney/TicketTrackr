@@ -42,7 +42,7 @@ export default function Invoices() {
             >
               <Input
                 type="text"
-                placeholder="Events near me..."
+                placeholder="Events near me"
                 name="search"
                 defaultValue={query ? query : ""}
               />
